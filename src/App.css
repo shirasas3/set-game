@@ -1,0 +1,377 @@
+.app {
+    height: 100vh;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 16px;
+}
+
+.screen {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+}
+
+.menu-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.title {
+    font-size: 64px;
+    margin: 24px 0 0;
+    text-align: center;
+    letter-spacing: 2px;
+    color: var(--acc);
+}
+
+.title.small {
+    font-size: 28px;
+    margin: 8px 0 0;
+}
+
+.sub {
+    text-align: center;
+    color: var(--mut);
+    margin: 0 auto 8px;
+    max-width: 420px;
+}
+
+.stack {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-width: 360px;
+    width: 100%;
+    margin: 12px auto;
+}
+
+.row {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 8px;
+}
+
+.btn {
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-weight: 700;
+    font-size: 18px;
+    text-align: center;
+}
+
+.btn.primary {
+    background: var(--acc);
+    color: #fff;
+}
+
+.btn.ghost {
+    background: var(--pan);
+}
+
+.btn.small {
+    font-size: 14px;
+    padding: 9px 14px;
+    border-radius: 9px;
+}
+
+label.btn {
+    cursor: pointer;
+}
+
+.seg {
+    display: flex;
+    background: var(--pan);
+    border-radius: 10px;
+    padding: 3px;
+    margin-top: -6px;
+}
+
+.seg button {
+    flex: 1;
+    background: none;
+    padding: 6px;
+    border-radius: 8px;
+    text-transform: capitalize;
+    font-size: 14px;
+}
+
+.seg button.on {
+    background: var(--acc);
+    color: #fff;
+}
+
+.label {
+    text-align: center;
+    color: var(--mut);
+    font-size: 14px;
+    margin-bottom: -6px;
+}
+
+.trio {
+    display: flex;
+    gap: 8px;
+}
+
+.trio .btn {
+    flex: 1;
+    padding: 14px 6px;
+    font-size: 16px;
+}
+
+.bar {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.score {
+    background: var(--pan);
+    border: 2px solid transparent;
+    border-radius: 12px;
+    padding: 6px 18px;
+    min-width: 110px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.score b {
+    display: block;
+    font-size: 24px;
+}
+
+.status {
+    min-height: 24px;
+    text-align: center;
+    color: var(--mut);
+    font-size: 15px;
+}
+
+.over {
+    text-align: center;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.hint {
+    text-align: center;
+    color: var(--mut);
+    font-size: 13px;
+    margin: 2px 0 0;
+}
+
+/* ---------- board ---------- */
+
+.grid {
+    display: grid;
+    /* always 3 rows; cards fill top to bottom, so 12 cards = 4 per row, extra cards add a column */
+    grid-template-rows: repeat(3, auto);
+    grid-auto-flow: column;
+    grid-template-columns: none !important;
+    grid-auto-columns: 130px;
+    gap: 16px 40px;
+    justify-content: center;
+    align-content: center;
+}
+
+/* multiplayer: one player at each wall of the board */
+.arena {
+    --pad: 92px;            /* pad thickness (height of top/bottom, width of left/right) */
+    --pad-len: 320px;       /* pad length */
+    display: grid;
+    /* fixed side tracks: the board is the same size and place for 2, 3 and 4 players */
+    grid-template-columns: var(--pad) 1fr var(--pad);
+    grid-template-rows: var(--pad) 1fr var(--pad);
+    grid-template-areas:
+        ". top ."
+        "left board right"
+        ". bottom .";
+    gap: 16px;
+    flex: 1;
+    min-height: 0;
+}
+
+.arena.solo {
+    display: block;
+    flex: initial;
+}
+
+.arena .grid {
+    grid-area: board;
+    align-content: center;
+}
+
+/* ---------- cards ---------- */
+
+.card {
+    background: #fff;
+    color: #000;
+    border: 3px solid transparent;
+    border-radius: 12px;
+    aspect-ratio: 3 / 4;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    padding: 6px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .2);
+    transition: transform .1s;
+}
+
+.card.sel {
+    border-color: var(--acc);
+    transform: scale(1.04);
+}
+
+.card.ok {
+    border-color: var(--ok);
+    transform: scale(1.06);
+}
+
+.card.bad {
+    border-color: var(--bad);
+    animation: shake .4s;
+}
+
+.card.flash {
+    border-color: var(--bad);
+    animation: pulse .5s infinite alternate;
+}
+
+@keyframes pulse {
+    to { transform: scale(1.07); }
+}
+
+@keyframes shake {
+    25% { transform: translateX(-4px); }
+    75% { transform: translateX(4px); }
+}
+
+.sym {
+    width: 70%;
+    max-width: 64px;
+    height: auto;
+    overflow: visible;
+}
+
+.pic {
+    position: relative;
+    width: 34px;
+    height: 34px;
+    border: 3px solid;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.pic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.pic-stripes {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(0deg, rgba(255, 255, 255, .75) 0 2px, transparent 2px 5px);
+}
+
+/* ---------- player pads ---------- */
+
+.pad {
+    background: var(--pan);
+    border: 3px solid var(--pc);
+    border-radius: 14px;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pad.active {
+    background: color-mix(in srgb, var(--pc) 25%, var(--pan));
+}
+
+/* top / bottom walls */
+.pad.bottom {
+    grid-area: bottom;
+    justify-self: center;
+    width: min(var(--pad-len), 100%);
+    height: var(--pad);
+}
+
+.pad.top {
+    grid-area: top;
+    justify-self: center;
+    width: min(var(--pad-len), 100%);
+    height: var(--pad);
+    transform: rotate(180deg);
+}
+
+/* left / right walls: vertical text so each player reads it facing the board */
+.pad.left,
+.pad.right {
+    writing-mode: vertical-rl;
+    align-self: center;
+    width: var(--pad);
+    height: min(var(--pad-len), 100%);
+}
+
+.pad.left .setpad,
+.pad.right .setpad {
+    padding: 8px 14px;
+}
+
+.pad.left {
+    grid-area: left;
+}
+
+.pad.right {
+    grid-area: right;
+    transform: rotate(180deg);
+}
+
+.pad .info {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--pc);
+    text-align: center;
+    min-width: 38px;
+}
+
+.pad .info b {
+    display: block;
+    font-size: 22px;
+}
+
+.setpad {
+    flex: 1;
+    background: var(--pc);
+    color: #fff;
+    border-radius: 10px;
+    padding: 14px 8px;
+    font-weight: 800;
+    font-size: 20px;
+}
+
+.setpad small {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    opacity: .8;
+}
+
+.setpad:disabled {
+    opacity: .35;
+    cursor: default;
+}
+
+.pad.active .setpad {
+    opacity: 1;
+}
