@@ -375,3 +375,118 @@ label.btn {
 .pad.active .setpad {
     opacity: 1;
 }
+
+/* ---------- phone ---------- */
+
+button {
+    touch-action: manipulation;              /* no double-tap zoom */
+    -webkit-tap-highlight-color: transparent;
+}
+
+@media (max-width: 700px) {
+    .app {
+        height: 100vh;
+        height: 100dvh;                      /* real visible height on phones */
+        padding: 8px;
+    }
+
+    .screen {
+        gap: 10px;
+        padding-top: 44px;                   /* room for the Menu button */
+    }
+
+    .menu-btn {
+        top: 8px;
+        left: 8px;
+    }
+
+    .title {
+        font-size: 44px;
+    }
+
+    .status {
+        font-size: 14px;
+    }
+
+    /* board: cards shrink to fit up to 5 columns on the screen width */
+    .grid {
+        grid-auto-columns: min(130px, calc((100vw - 52px) / 5));
+        gap: 8px;
+    }
+
+    .card {
+        border-width: 2px;
+        border-radius: 8px;
+        padding: 3px;
+        gap: 3px;
+    }
+
+    .sym {
+        width: 78%;
+    }
+
+    .pic {
+        width: 22px;
+        height: 22px;
+        border-width: 2px;
+        border-radius: 6px;
+    }
+
+    /* players: P2 + P4 in a row above the board, P1 + P3 in a row below it */
+    .arena {
+        --pad: 64px;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto 1fr auto;
+        grid-template-areas: none;
+        gap: 8px;
+    }
+
+    .arena .grid {
+        grid-area: auto;
+        grid-row: 2;
+        grid-column: 1 / -1;
+    }
+
+    .pad.top,
+    .pad.right,
+    .pad.bottom,
+    .pad.left {
+        grid-area: auto;
+        writing-mode: horizontal-tb;         /* no sideways text on phones */
+        align-self: stretch;
+        justify-self: stretch;
+        width: 100%;
+        height: var(--pad);
+    }
+
+    .pad.top    { grid-row: 1; grid-column: 1; }
+    .pad.right  { grid-row: 1; grid-column: 2; }   /* stays upside down */
+    .pad.bottom { grid-row: 3; grid-column: 1; }
+    .pad.left   { grid-row: 3; grid-column: 2; transform: none; }
+
+    /* with 2 or 3 players, the lonely pad takes the full row */
+    .arena:not(:has(.pad.right)) .pad.top    { grid-column: 1 / -1; }
+    .arena:not(:has(.pad.left))  .pad.bottom { grid-column: 1 / -1; }
+
+    .pad {
+        padding: 5px;
+        gap: 6px;
+        border-width: 2px;
+    }
+
+    .pad .info {
+        min-width: 26px;
+        font-size: 11px;
+    }
+
+    .pad .info b {
+        font-size: 18px;
+    }
+
+    .setpad,
+    .pad.left .setpad,
+    .pad.right .setpad {
+        padding: 6px;
+        font-size: 16px;
+    }
+}
