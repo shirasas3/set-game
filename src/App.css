@@ -387,7 +387,7 @@ button {
     .app {
         height: 100vh;
         height: 100dvh;                      /* real visible height on phones */
-        padding: 8px;
+        padding: 40px;
     }
 
     .screen {
@@ -396,8 +396,8 @@ button {
     }
 
     .menu-btn {
-        top: 8px;
-        left: 8px;
+        top: 28px;
+        left: 28px;
     }
 
     .title {
