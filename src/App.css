@@ -383,20 +383,20 @@ button {
     -webkit-tap-highlight-color: transparent;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 700px) and (max-height: 900px) {
     .app {
         height: 100vh;
         height: 100dvh;                      /* real visible height on phones */
-        padding: 40px;
+        padding: 110px 20px;
     }
 
     .screen {
         gap: 10px;
-        padding-top: 44px;                   /* room for the Menu button */
+        /* padding-top: 44px;                   room for the Menu button */
     }
 
     .menu-btn {
-        top: 28px;
+        top: 50px;
         left: 28px;
     }
 
